@@ -1,0 +1,15 @@
+<h2><%= @category.name %></h2>
+
+<h3>Recipes in this category:</h3>
+<ul>
+  <% @category.recipes.each do |recipe| %>
+    <% bookmark = recipe.bookmarks.find_by(category: @category) %>
+    <li>
+      <%= recipe.name %> |
+      <%= link_to "Delete", category_bookmark_path(@category, bookmark), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Add a recipe", new_category_bookmark_path(@category) %>
+<%= link_to "Back to all categories", categories_path %>
